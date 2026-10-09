@@ -8,8 +8,10 @@
   },
   "files": [
     ".lakehouse",
+    "apps/site",
     "dist",
     "docs",
+    "overlays",
     "scripts",
     "src",
     "widget.json",
@@ -28,6 +30,7 @@
   "scripts": {
     "build": "node scripts/build-widget.mjs",
     "preview": "npm run build && node scripts/preview-server.mjs",
+    "site:serve": "npm run build && node scripts/preview-server.mjs",
     "test": "node --test tests/**/*.test.mjs",
     "readme:gen": "node scripts/readme-gen.mjs",
     "readme:check": "node scripts/readme-gen.mjs --check",

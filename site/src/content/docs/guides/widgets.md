@@ -1,10 +1,17 @@
 ---
 title: Widgets
-description: Template-Widget is a standalone LakeHouse widget you can fork, customize, and load into an office.
+description: Template-Widget — one codebase for public site, in-app embed, and agent-driven per-user customization.
 ---
 
-This repository **is** a widget (`widget.json` + `src/` + `dist/widget.js`).
+This repository **is** a widget (`widget.json` + `src/core` + host/standalone entries).
 
-- Contract and agent flow: see root [AGENTS.md](https://github.com) / repo `AGENTS.md` and `docs/widget.md`.
-- SDK: `@lakehouse/widget-sdk` from the monorepo — until published, use the local stub under `stubs/widget-sdk/` (do not vendor the real SDK).
-- Preview: `npm run preview` opens the mock host (iframe + postMessage).
+## Three modes
+
+1. **Standalone website** — `apps/site` (Vercel free / Pages + custom domain)
+2. **LakeHouse apps** — `dist/widget.js` in desktop (Tauri) and web hosts
+3. **Agent reference** — declared `customization` points + `overlays/` for per-user dynamic UI/UX
+
+Prefer **overlays/config** over forking. Example narrative (PDF markup tool): see repo `docs/dynamic-ui.md`.
+
+- SDK: `@lakehouse/widget-sdk` from the monorepo — until published, local stub under `stubs/widget-sdk/`
+- Preview: `npm run preview` / `npm run site:serve`

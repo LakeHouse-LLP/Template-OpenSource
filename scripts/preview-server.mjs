@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Tiny static server for the mock host preview (repo root).
+ * Tiny static server for mock host + apps/site (repo root).
  */
 import { createServer } from "node:http";
 import { readFileSync, existsSync, statSync } from "node:fs";
@@ -32,4 +32,5 @@ createServer((req, res) => {
   res.end(readFileSync(file));
 }).listen(port, "127.0.0.1", () => {
   console.log(`preview: http://127.0.0.1:${port}/preview/`);
+  console.log(`site:    http://127.0.0.1:${port}/apps/site/`);
 });

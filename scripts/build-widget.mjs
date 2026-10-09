@@ -1,28 +1,31 @@
 #!/usr/bin/env node
 /**
- * Bundle src/index.ts → dist/widget.js (ESM) for host loading.
+ * Bundle widget + standalone entries → dist/
  */
 import { mkdirSync, writeFileSync, copyFileSync, readFileSync } from "node:fs";
 import path from "node:path";
 import * as esbuild from "esbuild";
 import { ROOT } from "./lib/repo.mjs";
 
-async function main() {
-  const outdir = path.join(ROOT, "dist");
-  mkdirSync(outdir, { recursive: true });
-
+async function bundle(entryRel, outfileRel) {
   await esbuild.build({
-    entryPoints: [path.join(ROOT, "src/index.ts")],
-    outfile: path.join(outdir, "widget.js"),
+    entryPoints: [path.join(ROOT, entryRel)],
+    outfile: path.join(ROOT, outfileRel),
     bundle: true,
     format: "esm",
     platform: "browser",
     target: ["es2022"],
     sourcemap: true,
-    // Keep the stub/SDK external only if published; stub is bundled for preview.
-    // When real SDK publishes as ESM peer, mark it external in a follow-up.
     logLevel: "info",
   });
+}
+
+async function main() {
+  const outdir = path.join(ROOT, "dist");
+  mkdirSync(outdir, { recursive: true });
+
+  await bundle("src/entry/widget.ts", "dist/widget.js");
+  await bundle("src/entry/standalone.ts", "dist/standalone.js");
 
   copyFileSync(path.join(ROOT, "widget.json"), path.join(outdir, "widget.json"));
 
@@ -34,6 +37,8 @@ async function main() {
         id: manifest.id,
         version: manifest.version,
         entry: "widget.js",
+        standalone: "standalone.js",
+        site: manifest.standalone?.site ?? "apps/site",
         builtAt: new Date().toISOString(),
       },
       null,
@@ -41,7 +46,7 @@ async function main() {
     )}\n`,
   );
 
-  console.log("build-widget: wrote dist/widget.js + dist/widget.json");
+  console.log("build-widget: wrote dist/widget.js + dist/standalone.js + dist/widget.json");
 }
 
 main().catch((err) => {

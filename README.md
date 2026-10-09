@@ -50,7 +50,7 @@
 | Org runbook | `{owner}/.github` (see [docs/org.md](./docs/org.md)) |
 <!-- /AUTO:repo-meta -->
 
-This repo **is a widget**: [`widget.json`](./widget.json) + [`src/`](./src/) hello-world + mock host in [`preview/`](./preview/). SDK: `@lakehouse/widget-sdk` (published from the monorepo). Until then, a **placeholder** local stub lives in [`stubs/widget-sdk/`](./stubs/widget-sdk/) — do not vendor the real SDK. Details: [docs/widget.md](./docs/widget.md).
+This repo **is a widget** with **three modes** from one codebase: public site (`apps/site`), LakeHouse host entry (`dist/widget.js`), and agent reference for per-user overlays ([docs/dynamic-ui.md](./docs/dynamic-ui.md)). Core lives in [`src/core/`](./src/core/); customization points in [`widget.json`](./widget.json). SDK: `@lakehouse/widget-sdk` (monorepo) — until published, use [`stubs/widget-sdk/`](./stubs/widget-sdk/) (do not vendor the real SDK).
 
 ## Quick start
 
@@ -60,10 +60,11 @@ npm run hooks:install
 npm run check:widget
 npm run build
 npm test
-npm run preview
+npm run preview      # mock LakeHouse host
+npm run site:serve   # public shell → /apps/site/?overlay=example
 ```
 
-Agents: fork → customize `src/` / `widget.json` → bump versions → `npm run check:all` → load `dist/` into the office. See [AGENTS.md](./AGENTS.md).
+Agents: prefer **overlays** over forking ([docs/customization.md](./docs/customization.md)). PDF markup-style example in [docs/dynamic-ui.md](./docs/dynamic-ui.md). See [AGENTS.md](./AGENTS.md).
 
 ## Releasing
 

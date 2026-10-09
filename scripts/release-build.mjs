@@ -33,6 +33,7 @@ async function main() {
   execFileSync("npm", ["run", "build"], { cwd: ROOT, stdio: "inherit" });
 
   const distWidget = path.join(ROOT, "dist", "widget.js");
+  const distStandalone = path.join(ROOT, "dist", "standalone.js");
   const distManifest = path.join(ROOT, "dist", "widget.json");
   if (!existsSync(distWidget) || !existsSync(distManifest)) {
     console.error("release-build: missing dist/widget.js or dist/widget.json");
@@ -41,7 +42,11 @@ async function main() {
 
   const manifest = JSON.parse(readFileSync(distManifest, "utf8"));
   const bundleName = `${manifest.id.replace(/[^a-zA-Z0-9._-]+/g, "-")}-${manifest.version}.js`;
+  const standaloneName = `${manifest.id.replace(/[^a-zA-Z0-9._-]+/g, "-")}-${manifest.version}.standalone.js`;
   copyFileSync(distWidget, path.join(OUT, bundleName));
+  if (existsSync(distStandalone)) {
+    copyFileSync(distStandalone, path.join(OUT, standaloneName));
+  }
   copyFileSync(distManifest, path.join(OUT, "widget.json"));
   if (existsSync(path.join(ROOT, "dist", "widget.js.map"))) {
     copyFileSync(path.join(ROOT, "dist", "widget.js.map"), path.join(OUT, `${bundleName}.map`));

@@ -22,6 +22,18 @@ describe("widget contract", () => {
     assert.ok(manifest.engines?.lakehouse);
   });
 
+  it("declares customization points for dynamic UI/UX", () => {
+    const manifest = load("widget.json");
+    const c = manifest.customization;
+    assert.equal(c.preference, "overlay");
+    assert.equal(c.forkFallback, true);
+    assert.ok(c.themeTokens?.accent);
+    assert.ok(Array.isArray(c.layoutSlots) && c.layoutSlots.includes("main"));
+    assert.equal(typeof c.featureFlags, "object");
+    assert.ok(Array.isArray(c.toolbar?.actions));
+    assert.ok(Array.isArray(c.extensionHooks) && c.extensionHooks.includes("onMount"));
+  });
+
   it("engines.lakehouse accepts the default CI host version", () => {
     const manifest = load("widget.json");
     assert.equal(isHostCompatible("0.1.0", manifest.engines.lakehouse), true);
@@ -33,5 +45,6 @@ describe("widget contract", () => {
     const schema = load("widget.schema.json");
     assert.equal(schema.type, "object");
     assert.match(String(schema.description ?? ""), /TODO\(widget-sdk\)/);
+    assert.ok(schema.required.includes("customization"));
   });
 });
