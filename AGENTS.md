@@ -1,10 +1,40 @@
-# Agent instructions (public template)
+# Agent instructions (Template-Widget)
 
-This repository is the **Template-OpenSource** starter for public projects in the org described by [`.lakehouse/org.json`](./.lakehouse/org.json) (brand + mutable `orgName`).
+This repository is **Template-Widget** — a standalone, agent-friendly **LakeHouse Studio widget** (public). Org identity: [`.lakehouse/org.json`](./.lakehouse/org.json).
+
+**Retired name:** `Template-OpenSource` → `Template-Widget` (see [docs/retired-names.md](./docs/retired-names.md)). Update remotes if your clone still points at the old URL.
 
 Projects created from this template must use **plain repository names** (no `Template-` prefix). The `Template-` prefix is reserved for template repositories only.
 
-Org runbook / shared defaults: the organization [`.github`](./docs/org.md) repository (`{owner}/.github`, owner from `github.repository_owner` or `org.json`).
+Org runbook / shared defaults: `{owner}/.github` (owner from `github.repository_owner` or `org.json`). See [docs/org.md](./docs/org.md).
+
+## Agent flow — fork, customize, load into my office
+
+1. **Fork** this repo (or copy from the template) under a plain name.
+2. **Customize safely**
+   - Edit `src/` (UI/behavior), `widget.json` metadata (`name`, `description`, `inputs`, `settingsSchema`, `agentHints`).
+   - Keep **dark mode only** and accent token `#7DFFFF`.
+   - Do **not** expand `stubs/widget-sdk/` (placeholder until `@lakehouse/widget-sdk` publishes).
+   - Do **not** vendor the real SDK from the monorepo.
+3. **Bump version** in **both** `widget.json` and `package.json` (same SemVer). Add a changeset.
+4. **Validate locally**
+   ```bash
+   npm ci
+   npm run hooks:install
+   npm run check:all
+   npm run preview   # mock host at http://127.0.0.1:4173/preview/
+   ```
+5. **Build loadable assets** — `npm run build` → `dist/widget.js` + `dist/widget.json`.
+6. **Load into office** — point the LakeHouse host at the release assets (bundle + `widget.json`) or a local `dist/` path. Host checks `engines.lakehouse`, permissions, and checksums/attestations on releases.
+7. Open a **draft PR**; Sen merges with a **merge commit**. Do not merge `Template-*` yourself.
+
+### Safe to change
+
+- `src/`, `preview/`, `widget.json` (metadata + schemas you own), docs prose, tests for your behavior
+
+### Do not change (unless Sen asks)
+
+- `.lakehouse/`, workflow pins, release/OIDC wiring, `stubs/widget-sdk/` shape beyond TODO replacement, org secrets/settings
 
 ## Cost and hosting
 
@@ -20,7 +50,7 @@ Org runbook / shared defaults: the organization [`.github`](./docs/org.md) repos
 ## License
 
 - `LICENSE` is a placeholder until the owner (Sen / `@zsenarchitect`) chooses.
-- **Suggested default: Apache-2.0.** Swapping is documented in `LICENSE` and `docs/license.md`.
+- **Suggested default: Apache-2.0.** See `LICENSE` and `docs/license.md`.
 
 ## Never do
 
@@ -30,55 +60,46 @@ Agents and automation must **never**:
 2. **Force-push** to any branch on any remote.
 3. **Delete or rename** repositories, branches, or tags.
 4. **Merge** into `Template-*` repositories or into the org `.github` repository.
-5. **Vendor** shared / org-common code into this tree (link or depend instead).
-6. **Push to an unexpected remote** (see `npm run check:remote` / `scripts/check-wrong-remote.mjs`).
+5. **Vendor** the real `@lakehouse/widget-sdk` or other shared monorepo packages into this tree.
+6. **Push to an unexpected remote** (see `npm run check:remote`).
 7. **Hardcode the GitHub org slug** in workflows, docs, or badges (use `org.json`, `github.repository_owner`, brand, or custom domain).
 
 ## Required local checks
 
 ```bash
 npm install
-npm run hooks:install          # gitleaks pre-commit (cross-platform)
-npm run check:remote           # WRONG_REMOTE guard
-npm run check:tier             # .lakehouse/tier === public and repo is public
-npm run check:runners          # fail if any workflow uses runs-on: self-hosted
-npm run check:org-slug         # fail on hardcoded org slug outside allowlist
-npm run check:pins             # workflow action SHAs match .lakehouse/pins.json
-npm run readme:gen             # refresh <!-- AUTO:* --> blocks
-npm run citation:gen           # refresh CITATION.cff from org.json
-npm run readme:check           # fail when README is stale
+npm run hooks:install
+npm run check:remote
+npm run check:tier
+npm run check:runners
+npm run check:org-slug
+npm run check:pins
+npm run check:widget
+npm run build
+npm test
+npm run readme:gen
+npm run citation:gen
+npm run readme:check
+npm run check:all
 ```
 
-## README autogen
+## Widget contract
 
-Hand-written README prose stays short. Generated sections live between:
+- Manifest: [`widget.json`](./widget.json) validated by [`widget.schema.json`](./widget.schema.json) (temporary — **TODO** use schema from published `@lakehouse/widget-sdk`).
+- Canonical SDK: monorepo `packages/widget-sdk`. Until published, depend on `file:./stubs/widget-sdk` (placeholder version `0.0.0-placeholder.0`).
+- Sandboxing model: iframe + postMessage (see `preview/`). Host enforces permissions.
+- Guide: [docs/widget.md](./docs/widget.md).
 
-```html
-<!-- AUTO:name -->
-...generated...
-<!-- /AUTO:name -->
-```
+## Discoverability & contributors
 
-Public badges and links use the **custom domain** from `org.json` (never `*.github.io`). CI fails when AUTO blocks are stale. A weekly workflow regenerates them, opens a PR if needed, and runs lychee link checks.
-
-## Discoverability
-
-Follow [docs/discoverability.md](./docs/discoverability.md). Do not change GitHub description/topics/homepage (Sen-only). Run `npm run check:discoverability`.
-
-## Contributors
-
-Community health files: [CONTRIBUTING.md](./CONTRIBUTING.md), [GOVERNANCE.md](./GOVERNANCE.md), [SUPPORT.md](./SUPPORT.md), [ROADMAP.md](./ROADMAP.md), [docs/maintainer-playbook.md](./docs/maintainer-playbook.md). Seed starter issues per [docs/starter-issues.md](./docs/starter-issues.md). Never run fork PR code on self-hosted runners; never pair `pull_request_target` with checkout of PR code.
+- [docs/discoverability.md](./docs/discoverability.md) — Sen sets description/topics.
+- [CONTRIBUTING.md](./CONTRIBUTING.md), [GOVERNANCE.md](./GOVERNANCE.md), [docs/maintainer-playbook.md](./docs/maintainer-playbook.md).
 
 ## Changelog and releases
 
-Every PR must add a **changeset** (`npx changeset`) and/or update `CHANGELOG.md`, **or** carry the `skip-changelog` label.
+Every PR must add a **changeset** and/or update `CHANGELOG.md`, **or** carry `skip-changelog`.
 
-Release tags (`vX.Y.Z`) are created **only by CI**. Never tag or publish by hand. See [docs/releasing.md](./docs/releasing.md) and [docs/rollback.md](./docs/rollback.md).
-
-## Secrets and client data
-
-- gitleaks runs in pre-commit and in CI (full git history, free CLI).
-- Deny-list covers placeholder client/firm names, CAD binaries (`*.rvt`, `*.3dm`, `*.dwg`), `.env` files, and internal hostnames. See `.gitleaks.toml`.
+Release tags (`vX.Y.Z`) are **CI-only**. Release assets include the **loadable widget bundle** + `widget.json` + checksums + provenance. See [docs/releasing.md](./docs/releasing.md).
 
 ## Ownership
 

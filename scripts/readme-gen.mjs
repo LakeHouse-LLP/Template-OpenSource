@@ -50,7 +50,7 @@ function licenseStatus() {
 
 function generators(org, remote) {
   const base = publicBaseUrl(org);
-  const name = remote?.name ?? "Template-OpenSource";
+  const name = remote?.name ?? "Template-Widget";
   resolveOrgOwner(org);
   const lic = licenseStatus();
   const t = tier();

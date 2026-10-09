@@ -16,6 +16,11 @@ const required = [
   "docs/media/README.md",
   "docs/media/logo-light.svg",
   "docs/media/logo-dark.svg",
+  "docs/widget.md",
+  "docs/retired-names.md",
+  "widget.json",
+  "widget.schema.json",
+  "src/index.ts",
   "NOTICE",
 ];
 

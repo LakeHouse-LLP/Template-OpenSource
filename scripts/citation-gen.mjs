@@ -19,7 +19,7 @@ function yamlEscape(value) {
 
 function buildCitation(org, remote) {
   const base = publicBaseUrl(org);
-  const title = remote?.name ?? "Template-OpenSource";
+  const title = remote?.name ?? "Template-Widget";
   const licenseRaw = readText("LICENSE");
   const license = /License pending/i.test(licenseRaw)
     ? "pending"

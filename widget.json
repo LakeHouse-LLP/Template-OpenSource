@@ -1,0 +1,74 @@
+{
+  "$schema": "./widget.schema.json",
+  "id": "lakehouse.hello-widget",
+  "name": "Hello Widget",
+  "version": "0.0.0",
+  "description": "Standalone LakeHouse Studio hello-world widget — fork, customize, and load into a designer office.",
+  "author": {
+    "name": "LakeHouse Studio"
+  },
+  "license": "UNLICENSED",
+  "entry": {
+    "path": "dist/widget.js",
+    "export": "default"
+  },
+  "ui": {
+    "surfaces": ["panel"],
+    "slots": ["main"]
+  },
+  "inputs": {
+    "greeting": {
+      "type": "string",
+      "description": "Optional greeting override",
+      "default": "Hello"
+    }
+  },
+  "outputs": {
+    "ready": {
+      "type": "boolean",
+      "description": "True once the widget has mounted"
+    }
+  },
+  "events": {
+    "ping": {
+      "description": "Emitted when the user clicks Ping",
+      "payload": {
+        "type": "object"
+      }
+    }
+  },
+  "permissions": [],
+  "capabilities": ["ui.panel"],
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "title": {
+        "type": "string",
+        "default": "Hello Widget"
+      }
+    },
+    "additionalProperties": false
+  },
+  "engines": {
+    "lakehouse": ">=0.1.0 <1.0.0"
+  },
+  "icons": {
+    "svg": "docs/media/logo-dark.svg"
+  },
+  "screenshots": [],
+  "agentHints": {
+    "summary": "Minimal dark-mode panel widget. Safe to change src/, widget.json metadata, and styles. Bump version in widget.json and package.json together.",
+    "safeToEdit": [
+      "src/",
+      "widget.json",
+      "preview/",
+      "docs/media/"
+    ],
+    "doNotTouch": [
+      "stubs/widget-sdk/",
+      ".lakehouse/",
+      ".github/workflows/"
+    ],
+    "loadIntoOffice": "Build with npm run build, then load dist/widget.js + widget.json into the LakeHouse host (see AGENTS.md)."
+  }
+}
