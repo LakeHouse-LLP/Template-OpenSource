@@ -1,6 +1,7 @@
 # README first paragraph + repo description/topics (8–20) via gh api.
 # Public repos: GitHub-hosted only. See docs/discoverability.md.
 # pull_request with no branches filter — stacked PRs must run CI.
+# merge_group: merge queue re-check (public main; GitHub-hosted only).
 # Action SHAs: .lakehouse/pins.json
 #
 # TODO: when org .github publishes a reusable discoverability workflow, replace
@@ -10,6 +11,7 @@ name: discoverability
 
 on:
   pull_request:
+  merge_group:
   push:
     branches: [main]
   workflow_dispatch:

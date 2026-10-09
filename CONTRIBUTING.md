@@ -52,7 +52,15 @@ git commit -s -m "Describe your change"
 2. Fill the PR template (summary, stack, tests, checklist).
 3. Touch `CHANGELOG.md` / `.changeset/` **or** add the `skip-changelog` label.
 4. Wait for CI (GitHub-hosted on public repos). Maintainers will not run untrusted fork code on self-hosted runners — see [docs/maintainer-playbook.md](docs/maintainer-playbook.md).
-5. Sen merges with a **merge commit** only (never squash/rebase-merge).
+5. Sen merges via the **merge queue** with a **merge commit** only (never squash/rebase-merge). Contributors and agents do not enqueue or merge.
+
+## Merge queue (public repos)
+
+On GitHub Free, the merge queue is available for **public** org repos only (this template and products created from it). Private templates stay on manual bottom-up merge commits.
+
+- Required checks re-run on `merge_group` (GitHub-hosted runners — never self-hosted on public).
+- **Only PRs targeting `main` enter the queue.** Stacked PRs whose base is another feature branch stay outside the queue until retargeted.
+- Stack flow: merge bottom-up → retarget the next PR to `main` → Sen enqueues it. Details: [docs/stacked-prs.md](docs/stacked-prs.md).
 
 ## Org constraints (summary)
 
