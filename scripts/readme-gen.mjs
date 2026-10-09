@@ -46,19 +46,25 @@ function licenseStatus() {
 function generators(org, remote) {
   const base = publicBaseUrl(org);
   const name = remote?.name ?? "Template-OpenSource";
-  // Resolve owner for runtime checks only — do not embed the mutable slug in README.
   resolveOrgOwner(org);
   const lic = licenseStatus();
   const t = tier();
+  const brandAlt = org.brand.replace(/"/g, "");
 
   return {
+    header: [
+      `<picture>`,
+      `  <source media="(prefers-color-scheme: dark)" srcset="docs/media/logo-dark.svg" />`,
+      `  <img src="docs/media/logo-light.svg" alt="${brandAlt}" width="320" height="80" />`,
+      `</picture>`,
+    ].join("\n"),
+
+    // Spec badge row: CI, release, license, Scorecard (URLs from org.json domain).
     badges: [
       `[![CI](${base}/badges/ci.svg)](${base}/ci)`,
+      `[![Release](${base}/badges/release.svg)](${base}/releases)`,
+      `[![License](https://img.shields.io/badge/license-${lic.badgeLabel}-lightgrey)](./LICENSE)`,
       `[![OpenSSF Scorecard](${base}/badges/scorecard.svg)](${base}/scorecard)`,
-      `[![CodeQL](${base}/badges/codeql.svg)](${base}/codeql)`,
-      `[![tier](https://img.shields.io/badge/tier-${encodeURIComponent(t)}-0B6E4F)](./.lakehouse/tier)`,
-      `[![license](https://img.shields.io/badge/license-${lic.badgeLabel}-lightgrey)](./LICENSE)`,
-      `[![npm scope](https://img.shields.io/badge/scope-${encodeURIComponent(org.packageScope)}-cb3837)](./.lakehouse/org.json)`,
     ].join("\n"),
 
     "repo-meta": [
@@ -74,6 +80,7 @@ function generators(org, remote) {
       `| Code owner | [@zsenarchitect](https://github.com/zsenarchitect) |`,
       `| Runners | GitHub-hosted only |`,
       `| Merge style | Merge commits only |`,
+      `| Releases | changesets → CI \`vX.Y.Z\` tag → draft GH release + npm OIDC |`,
       `| Action pins | [\`.lakehouse/pins.json\`](./.lakehouse/pins.json) |`,
       `| Org runbook | \`{owner}/.github\` (see [docs/org.md](./docs/org.md)) |`,
     ].join("\n"),
@@ -83,6 +90,7 @@ function generators(org, remote) {
     toc: [
       "- [About](#about)",
       "- [Quick start](#quick-start)",
+      "- [Releasing](#releasing)",
       "- [Agent rules](#agent-rules)",
       "- [Contributing](#contributing)",
       "- [Security](#security)",
@@ -108,7 +116,6 @@ function main() {
   const current = readFileSync(README, "utf8");
   const next = applyBlocks(current, values);
 
-  // Guard: generated README must not embed the mutable org slug (org-lint allowlist excludes README).
   const slug = org.orgName;
   if (next.includes(slug) || next.includes(slug.toLowerCase())) {
     console.error(
