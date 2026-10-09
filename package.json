@@ -1,7 +1,7 @@
 {
   "name": "@lakehouse/template-opensource",
   "version": "0.0.0",
-  "description": "Public open-source project template (Lakehouse brand; see .lakehouse/org.json)",
+  "description": "Public open-source project template (LakeHouse brand; see .lakehouse/org.json)",
   "type": "module",
   "engines": {
     "node": ">=20"

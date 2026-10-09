@@ -5,9 +5,9 @@ Canonical fields live in [`.lakehouse/org.json`](../.lakehouse/org.json):
 | Field | Role |
 | --- | --- |
 | `orgName` | Mutable GitHub organization login |
-| `brand` | Stable public brand |
-| `packageScope` | Brand-based npm scope (not the org slug) |
-| `domain` | Custom FQDN for public links/badges (**never** `*.github.io`) |
+| `brand` | Stable public brand (`LakeHouse` / LakeHouse Studio styling) |
+| `packageScope` | Brand-based npm scope (not the org slug), e.g. `@lakehouse` |
+| `domain` | Custom FQDN for public links/badges, or `REPLACE_WITH_CUSTOM_DOMAIN` until Sen chooses one (**never** `*.github.io`; do not assume a hostname) |
 
 ## Runtime resolution
 
@@ -24,7 +24,7 @@ Do not hardcode the GitHub org slug in workflows, docs, or badges. `npm run chec
 
 ## On rename
 
-1. Update `orgName` in `.lakehouse/org.json` (brand / packageScope / domain stay put).
+1. Update `orgName` in `.lakehouse/org.json` (brand / packageScope stay put; set `domain` when purchased).
 2. Re-run `npm run readme:gen` and `npm run citation:gen`.
 3. Confirm CI still resolves owner via `github.repository_owner`.
 

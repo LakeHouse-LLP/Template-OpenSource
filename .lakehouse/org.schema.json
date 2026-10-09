@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://opensource.lakehouse.dev/schemas/org.schema.json",
-  "title": "Lakehouse org identity",
+  "$id": "https://example.invalid/schemas/org.schema.json",
+  "title": "LakeHouse org identity",
   "type": "object",
   "required": ["orgName", "brand", "packageScope", "domain"],
   "properties": {
@@ -13,7 +13,7 @@
     "brand": {
       "type": "string",
       "minLength": 1,
-      "description": "Stable public brand name."
+      "description": "Stable public brand name (LakeHouse Studio styling)."
     },
     "packageScope": {
       "type": "string",
@@ -22,8 +22,14 @@
     },
     "domain": {
       "type": "string",
-      "pattern": "^(?!.*\\.github\\.io$)([a-z0-9]([a-z0-9-]*[a-z0-9])?\\.)+[a-z]{2,}$",
-      "description": "Custom FQDN for public links/badges; github.io is rejected."
+      "description": "Custom FQDN for public links/badges, or REPLACE_WITH_CUSTOM_DOMAIN until chosen. github.io is rejected.",
+      "anyOf": [
+        { "const": "REPLACE_WITH_CUSTOM_DOMAIN" },
+        {
+          "type": "string",
+          "pattern": "^(?!.*\\.github\\.io$)([a-z0-9]([a-z0-9-]*[a-z0-9])?\\.)+[a-z]{2,}$"
+        }
+      ]
     }
   },
   "additionalProperties": true

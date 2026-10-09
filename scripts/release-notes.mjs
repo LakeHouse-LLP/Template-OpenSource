@@ -20,6 +20,7 @@ function main() {
   const repo = remote?.name || "Template-OpenSource";
   const base = publicBaseUrl(org);
   const githubRepo = `https://github.com/${owner}/${repo}`;
+  const publicBase = base ?? `(set domain in .lakehouse/org.json; currently ${org.domain})`;
 
   let body = readFileSync(TEMPLATE, "utf8");
   const replacements = {
@@ -28,7 +29,7 @@ function main() {
     "{{BRAND}}": org.brand,
     "{{PACKAGE_SCOPE}}": org.packageScope,
     "{{DOMAIN}}": org.domain,
-    "{{PUBLIC_BASE}}": base,
+    "{{PUBLIC_BASE}}": publicBase,
     "{{GITHUB_REPO}}": githubRepo,
     "{{CHANGELOG_URL}}": `${githubRepo}/blob/main/CHANGELOG.md`,
     "{{PACKAGE_NAME}}": pkg.name,

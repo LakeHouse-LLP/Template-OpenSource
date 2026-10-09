@@ -1,12 +1,17 @@
 #!/usr/bin/env node
 /**
  * Fill <!-- AUTO:name --> blocks in README.md from .lakehouse/org.json.
- * Public badges/links use the custom domain (never *.github.io).
+ * Public badges/links use the custom domain when set (never *.github.io).
  */
 import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { ROOT, expectedRemoteFromEnvOrGit, readText } from "./lib/repo.mjs";
-import { loadOrg, publicBaseUrl, resolveOrgOwner } from "./lib/org.mjs";
+import {
+  loadOrg,
+  publicBaseUrl,
+  resolveOrgOwner,
+  isDomainPlaceholder,
+} from "./lib/org.mjs";
 
 const README = path.join(ROOT, "README.md");
 const BLOCK_RE = /<!-- AUTO:([a-z0-9_-]+) -->[\s\S]*?<!-- \/AUTO:\1 -->/g;
@@ -49,7 +54,26 @@ function generators(org, remote) {
   resolveOrgOwner(org);
   const lic = licenseStatus();
   const t = tier();
+  const domainPending = isDomainPlaceholder(org.domain);
   const brandAlt = org.brand.replace(/"/g, "");
+
+  const badges = domainPending
+    ? [
+        `[![CI](https://img.shields.io/badge/CI-domain%20pending-lightgrey)](./docs/org.md)`,
+        `[![Release](https://img.shields.io/badge/release-domain%20pending-lightgrey)](./docs/org.md)`,
+        `[![License](https://img.shields.io/badge/license-${lic.badgeLabel}-lightgrey)](./LICENSE)`,
+        `[![OpenSSF Scorecard](https://img.shields.io/badge/Scorecard-domain%20pending-lightgrey)](./docs/org.md)`,
+      ]
+    : [
+        `[![CI](${base}/badges/ci.svg)](${base}/ci)`,
+        `[![Release](${base}/badges/release.svg)](${base}/releases)`,
+        `[![License](https://img.shields.io/badge/license-${lic.badgeLabel}-lightgrey)](./LICENSE)`,
+        `[![OpenSSF Scorecard](${base}/badges/scorecard.svg)](${base}/scorecard)`,
+      ];
+
+  const domainRow = domainPending
+    ? `| Public domain | \`${org.domain}\` (set a real custom domain in org.json — never assume a hostname; never \`*.github.io\`) |`
+    : `| Public domain | [\`${org.domain}\`](${base}/) |`;
 
   return {
     header: [
@@ -59,20 +83,14 @@ function generators(org, remote) {
       `</picture>`,
     ].join("\n"),
 
-    // Spec badge row: CI, release, license, Scorecard (URLs from org.json domain).
-    badges: [
-      `[![CI](${base}/badges/ci.svg)](${base}/ci)`,
-      `[![Release](${base}/badges/release.svg)](${base}/releases)`,
-      `[![License](https://img.shields.io/badge/license-${lic.badgeLabel}-lightgrey)](./LICENSE)`,
-      `[![OpenSSF Scorecard](${base}/badges/scorecard.svg)](${base}/scorecard)`,
-    ].join("\n"),
+    badges: badges.join("\n"),
 
     "repo-meta": [
       `| | |`,
       `| --- | --- |`,
       `| Brand | \`${org.brand}\` |`,
       `| Package scope | \`${org.packageScope}\` |`,
-      `| Public domain | [\`${org.domain}\`](${base}/) |`,
+      domainRow,
       `| GitHub owner | runtime: \`github.repository_owner\` or \`.lakehouse/org.json\` \`orgName\` |`,
       `| Repository | \`${name}\` |`,
       `| Tier | \`${t}\` |`,
@@ -121,6 +139,10 @@ function main() {
     console.error(
       "readme-gen: refusing to write org slug into README; use brand/domain/packageScope only",
     );
+    process.exit(1);
+  }
+  if (next.includes(["opensource", "lakehouse", "dev"].join("."))) {
+    console.error("readme-gen: refusing assumed public domain hostname");
     process.exit(1);
   }
 

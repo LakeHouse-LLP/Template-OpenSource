@@ -6,7 +6,7 @@
 import { writeFileSync } from "node:fs";
 import path from "node:path";
 import { ROOT, expectedRemoteFromEnvOrGit, readText } from "./lib/repo.mjs";
-import { loadOrg, publicBaseUrl } from "./lib/org.mjs";
+import { loadOrg, publicBaseUrl, isDomainPlaceholder } from "./lib/org.mjs";
 
 const OUT = path.join(ROOT, "CITATION.cff");
 
@@ -27,6 +27,11 @@ function buildCitation(org, remote) {
       ? "Apache-2.0"
       : "SEE LICENSE";
 
+  const authorWebsite = base ? `    website: ${base}/\n` : "";
+  const urlBlock = base
+    ? `repository-code: ${base}/\nurl: ${base}/`
+    : `# repository-code/url pending — set domain in .lakehouse/org.json (currently ${org.domain})`;
+
   return `cff-version: 1.2.0
 title: ${yamlEscape(title)}
 message: >-
@@ -36,13 +41,11 @@ message: >-
 type: software
 authors:
   - name: ${yamlEscape(org.brand)}
-    website: ${base}/
-  - family-names: Zhang
+${authorWebsite}  - family-names: Zhang
     given-names: Sen
     alias: zsenarchitect
     website: https://github.com/zsenarchitect
-repository-code: ${base}/
-url: ${base}/
+${urlBlock}
 license: ${license}
 # Suggested license once finalized: Apache-2.0
 keywords:
@@ -54,7 +57,9 @@ abstract: >-
   Public GitHub template for ${org.brand} open-source projects. Provides
   OpenSSF-aligned defaults, README generation, changelog policy, secret
   scanning, and CI guards for zero-cost GitHub Free usage. Org identity lives
-  in .lakehouse/org.json (brand-stable packageScope + custom domain).
+  in .lakehouse/org.json (brand-stable packageScope + custom domain${
+    isDomainPlaceholder(org.domain) ? "; domain placeholder until Sen chooses one" : ""
+  }).
 `;
 }
 
@@ -66,6 +71,10 @@ function main() {
 
   if (next.includes(org.orgName) || next.includes(org.orgName.toLowerCase())) {
     console.error("citation-gen: refusing to embed org slug in CITATION.cff");
+    process.exit(1);
+  }
+  if (next.includes(["opensource", "lakehouse", "dev"].join("."))) {
+    console.error("citation-gen: refusing assumed public domain hostname");
     process.exit(1);
   }
 

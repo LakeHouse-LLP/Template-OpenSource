@@ -21,4 +21,4 @@ Org-wide brand masters (palette, usage rules, additional logo sizes) live in the
 - Prefer SVG/PNG for UI; GIF/MP4 for motion demos.
 - **Size limits (git):** aim ≤ 1 MB per file in-repo; ≤ 5 MB hard cap.
 - Larger media → **Git LFS** or attach to the **GitHub Release** (not the git tree).
-- Never use `*.github.io` for canonical media URLs; use the custom domain from `.lakehouse/org.json` when publishing public links.
+- Never use `*.github.io` for canonical media URLs; use the custom domain from `.lakehouse/org.json` when set (not the `REPLACE_WITH_CUSTOM_DOMAIN` placeholder).

@@ -29,7 +29,7 @@ Agents must not change these. Owner checklist:
 - [ ] Rulesets: merge commits only; required checks
 - [ ] npm trusted publisher → this repo’s `release` workflow (OIDC)
 - [ ] GitHub Environment `release` (optional reviewers) for the publish job
-- [ ] Repo homepage = custom domain from `org.json`
+- [ ] Choose/buy custom domain; replace `REPLACE_WITH_CUSTOM_DOMAIN` in `org.json`; set repo homepage to that domain
 - [ ] Topics / description per [repo-metadata.md](./repo-metadata.md)
 - [ ] Social preview image (1280×640) from `docs/media/` or org `brand/`
 

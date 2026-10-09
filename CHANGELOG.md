@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Lychee config uses `include_mail = false` (CLI no longer accepts `--exclude-mail`).
 - Dependency-review Action deferred until the owner enables Dependency graph (agents do not change settings).
 - Guards, README AUTO badges, and citations no longer hardcode the GitHub org slug (brand + custom domain instead).
+- `org.json` domain is `REPLACE_WITH_CUSTOM_DOMAIN` (no assumed hostname); brand set to `LakeHouse`.
 - Changeset status on PRs compares against the PR base ref so stacked PRs validate.
 
 [Unreleased]: https://github.com/LakeHouse-LLP/Template-OpenSource/compare/HEAD...HEAD
