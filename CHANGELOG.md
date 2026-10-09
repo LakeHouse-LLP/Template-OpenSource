@@ -9,12 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Initial LakeHouse-LLP **Template-OpenSource** scaffold (CI, OpenSSF Scorecard, CodeQL, DCO, gitleaks, README autogen, tier and runner guards). General-purpose OSS starter — no LakeHouse widget concepts.
+- Initial **Template-OpenSource** scaffold (CI, OpenSSF Scorecard, CodeQL, DCO, gitleaks, README autogen, tier and runner guards). General-purpose OSS starter — no LakeHouse widget concepts.
+- `.lakehouse/org.json` identity (orgName / brand `LakeHouse` / packageScope `@lakehouse` / domain `REPLACE_WITH_CUSTOM_DOMAIN`) and `.lakehouse/pins.json` action + reusable-workflow catalog.
+- Org-slug lint (`check:org-slug`), action-pin check (`check:pins`), and CITATION.cff generation from org.json.
+- `docs/org.md` pointing at the organization `.github` runbook.
 
 ### Fixed
 
 - Remote URL parsing avoids host substring checks (CodeQL).
 - Lychee config uses `include_mail = false` (CLI no longer accepts `--exclude-mail`).
 - Dependency-review Action deferred until the owner enables Dependency graph (agents do not change settings).
+- Guards, README AUTO badges, and citations no longer hardcode the GitHub org slug (brand + custom domain instead).
+- `org.json` domain is `REPLACE_WITH_CUSTOM_DOMAIN` (no assumed hostname); brand set to `LakeHouse`.
 
 [Unreleased]: https://github.com/LakeHouse-LLP/Template-OpenSource/compare/HEAD...HEAD

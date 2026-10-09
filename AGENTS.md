@@ -1,10 +1,12 @@
-# Agent instructions (LakeHouse-LLP public template)
+# Agent instructions (public template)
 
-This repository is the **Template-OpenSource** starter for **general-purpose** public projects in the [LakeHouse-LLP](https://github.com/LakeHouse-LLP) GitHub organization (non-LakeHouse products).
+This repository is the **Template-OpenSource** starter for **general-purpose** public projects in the org described by [`.lakehouse/org.json`](./.lakehouse/org.json) (brand + mutable `orgName`). Use it for non-LakeHouse products.
 
 It must **not** include LakeHouse widget concepts (`widget.json`, widget SDK, host compatibility). For LakeHouse-extensible widgets, use **Template-Widget** instead.
 
 Projects created from this template must use **plain repository names** (no `Template-` prefix). The `Template-` prefix is reserved for template repositories only.
+
+Org runbook / shared defaults: the organization [`.github`](./docs/org.md) repository (`{owner}/.github`, owner from `github.repository_owner` or `org.json`). Prefer those reusable workflows/docs when published; keep local copies with a `TODO` until then.
 
 ## Cost and hosting
 
@@ -30,9 +32,10 @@ Agents and automation must **never**:
 2. **Force-push** to any branch on any remote.
 3. **Delete or rename** repositories, branches, or tags.
 4. **Merge** into `Template-*` repositories or into the org `.github` repository.
-5. **Vendor** shared / org-common code into this tree (link or depend instead). Prefer org reusable workflows/docs in `{owner}/.github` when published; keep local copies with a `TODO` until then.
+5. **Vendor** shared / org-common code into this tree (link or depend instead). Prefer `{owner}/.github` reusable workflows/docs when published.
 6. **Push to an unexpected remote** (see `npm run check:remote` / `scripts/check-wrong-remote.mjs`).
-7. Add **LakeHouse widget** surfaces here (`widget.json`, `@lakehouse/widget-sdk`, host bridge/compat). Use Template-Widget.
+7. **Hardcode the GitHub org slug** in workflows, docs, or badges (use `org.json`, `github.repository_owner`, brand, or custom domain).
+8. Add **LakeHouse widget** surfaces here (`widget.json`, `@lakehouse/widget-sdk`, host bridge/compat). Use Template-Widget.
 
 ## Required local checks
 
@@ -42,7 +45,10 @@ npm run hooks:install          # gitleaks pre-commit (cross-platform)
 npm run check:remote           # WRONG_REMOTE guard
 npm run check:tier             # .lakehouse/tier === public and repo is public
 npm run check:runners          # fail if any workflow uses runs-on: self-hosted
+npm run check:org-slug         # fail on hardcoded org slug outside allowlist
+npm run check:pins             # workflow action SHAs match .lakehouse/pins.json
 npm run readme:gen             # refresh <!-- AUTO:* --> blocks
+npm run citation:gen           # refresh CITATION.cff from org.json
 npm run readme:check           # fail when README is stale
 ```
 
@@ -56,7 +62,7 @@ Hand-written README prose stays short. Generated sections live between:
 <!-- /AUTO:name -->
 ```
 
-CI fails when those blocks are stale. A weekly workflow regenerates them, opens a PR if needed, and runs lychee link checks.
+Public badges and links use the **custom domain** from `org.json` (never `*.github.io`). CI fails when AUTO blocks are stale. A weekly workflow regenerates them, opens a PR if needed, and runs lychee link checks.
 
 ## Changelog
 
