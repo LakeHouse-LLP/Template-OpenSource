@@ -12,5 +12,5 @@
       "@lakehouse/widget-sdk": ["./stubs/widget-sdk/index.d.ts"]
     }
   },
-  "include": ["src/**/*.ts", "stubs/widget-sdk/**/*.d.ts"]
+  "include": ["src/**/*.ts", "stubs/widget-sdk/**/*.d.ts", "apps/**/*.ts"]
 }
