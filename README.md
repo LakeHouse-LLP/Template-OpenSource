@@ -26,6 +26,7 @@
 - [Agent rules](#agent-rules)
 - [Contributing](#contributing)
 - [Security](#security)
+- [Contributors](#contributors)
 - [License](#license)
 <!-- /AUTO:toc -->
 
@@ -38,7 +39,7 @@
 | Package scope | `@lakehouse` |
 | Public domain | `REPLACE_WITH_CUSTOM_DOMAIN` (set a real custom domain in org.json — never assume a hostname; never `*.github.io`) |
 | GitHub owner | runtime: `github.repository_owner` or `.lakehouse/org.json` `orgName` |
-| Repository | `Template-Widget` |
+| Repository | `Template-OpenSource` |
 | Tier | `public` |
 | License | `pending` (suggested: Apache-2.0) |
 | Code owner | [@zsenarchitect](https://github.com/zsenarchitect) |
@@ -87,11 +88,28 @@ See [AGENTS.md](./AGENTS.md) (imported by [CLAUDE.md](./CLAUDE.md)).
 
 ## Contributing
 
-See [CONTRIBUTING.md](./CONTRIBUTING.md) for DCO sign-off and the stacked-PR merge-commit workflow.
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for the 5-minute Mac/Windows setup, Codespaces, DCO sign-off, and stacked-PR merge-commit workflow. Also: [ROADMAP.md](./ROADMAP.md), [SUPPORT.md](./SUPPORT.md), [GOVERNANCE.md](./GOVERNANCE.md), [docs/starter-issues.md](./docs/starter-issues.md).
 
 ## Security
 
 See [SECURITY.md](./SECURITY.md).
+
+## Contributors
+
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-0-orange.svg?style=flat-square)](#contributors)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://allcontributors.org) specification. Contributions of any kind welcome!
 
 ## License
 
