@@ -32,10 +32,9 @@ Agents and automation must **never**:
 2. **Force-push** to any branch on any remote.
 3. **Delete or rename** repositories, branches, or tags.
 4. **Merge** into `Template-*` repositories or into the org `.github` repository.
-5. **Vendor** shared / org-common code into this tree (link or depend instead). Prefer `{owner}/.github` reusable workflows/docs when published.
+5. **Vendor** shared / org-common code into this tree (link or depend instead).
 6. **Push to an unexpected remote** (see `npm run check:remote` / `scripts/check-wrong-remote.mjs`).
 7. **Hardcode the GitHub org slug** in workflows, docs, or badges (use `org.json`, `github.repository_owner`, brand, or custom domain).
-8. Add **LakeHouse widget** surfaces here (`widget.json`, `@lakehouse/widget-sdk`, host bridge/compat). Use Template-Widget.
 
 ## Required local checks
 
@@ -64,9 +63,11 @@ Hand-written README prose stays short. Generated sections live between:
 
 Public badges and links use the **custom domain** from `org.json` (never `*.github.io`). CI fails when AUTO blocks are stale. A weekly workflow regenerates them, opens a PR if needed, and runs lychee link checks.
 
-## Changelog
+## Changelog and releases
 
-Every PR must update `CHANGELOG.md` (Keep a Changelog, `[Unreleased]`) **or** carry the `skip-changelog` label.
+Every PR must add a **changeset** (`npx changeset`) and/or update `CHANGELOG.md`, **or** carry the `skip-changelog` label.
+
+Release tags (`vX.Y.Z`) are created **only by CI**. Never tag or publish by hand. See [docs/releasing.md](./docs/releasing.md) and [docs/rollback.md](./docs/rollback.md).
 
 ## Secrets and client data
 
