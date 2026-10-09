@@ -65,6 +65,11 @@ jobs:
       - name: Release files present
         run: npm run release:validate
 
+      - name: Discoverability (README paragraph)
+        run: npm run check:discoverability
+        env:
+          DISCOVERABILITY_REQUIRE_METADATA: "false"
+
       - name: Changelog policy
         if: github.event_name == 'pull_request'
         run: npm run check:changelog -- --strict

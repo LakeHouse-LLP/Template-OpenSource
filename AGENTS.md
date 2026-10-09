@@ -49,6 +49,7 @@ npm run check:pins             # workflow action SHAs match .lakehouse/pins.json
 npm run readme:gen             # refresh <!-- AUTO:* --> blocks
 npm run citation:gen           # refresh CITATION.cff from org.json
 npm run readme:check           # fail when README is stale
+npm run check:discoverability  # README first paragraph (+ topics/description on Actions)
 ```
 
 ## README autogen
@@ -73,6 +74,7 @@ Release tags (`vX.Y.Z`) are created **only by CI**. Never tag or publish by hand
 
 - gitleaks runs in pre-commit and in CI (full git history, free CLI).
 - Deny-list covers placeholder client/firm names, CAD binaries (`*.rvt`, `*.3dm`, `*.dwg`), `.env` files, and internal hostnames. See `.gitleaks.toml`.
+
 
 ## Ownership
 

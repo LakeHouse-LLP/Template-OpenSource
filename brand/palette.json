@@ -1,0 +1,22 @@
+{
+  "brand": "LakeHouse Studio",
+  "mode": "dark-only",
+  "note": "Placeholder tokens — swappable when the separate brand guide lands. Single accent token only.",
+  "colors": {
+    "background": "#0B1214",
+    "foreground": "#F4FBFF",
+    "muted": "#8AA0A8",
+    "accent": "#7DFFFF",
+    "danger": "#FF6B6B"
+  },
+  "tokens": {
+    "accent": "#7DFFFF"
+  },
+  "theme": {
+    "dark": {
+      "background": "#0B1214",
+      "foreground": "#F4FBFF",
+      "accent": "#7DFFFF"
+    }
+  }
+}

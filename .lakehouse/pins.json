@@ -17,6 +17,11 @@
         "file": "release.yml",
         "status": "planned",
         "note": "TODO: call org release-public reusable workflow when published; keep local release.yml until then."
+      },
+      "placeholder-discoverability": {
+        "file": "discoverability.yml",
+        "status": "planned",
+        "note": "TODO: call org discoverability-check reusable workflow when published; keep local discoverability.yml until then."
       }
     }
   },

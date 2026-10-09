@@ -7,9 +7,7 @@
 </picture>
 <!-- /AUTO:header -->
 
-⚠ TEMPLATE — open-source project starter for the **LakeHouse** brand (org identity: [`.lakehouse/org.json`](./.lakehouse/org.json)).
-
-Projects created from this template should use a **plain repository name** (no `Template-` prefix).
+**LakeHouse Studio** Template-OpenSource is the general-purpose open-source starter for designers and small offices building AEC and design tools (Revit, Rhino, Grasshopper, BIM) — CI, release, SEO, and contributor defaults with **no** LakeHouse widget concepts. Create a plain-named public repo from this template (no `Template-` prefix); identity lives in [`.lakehouse/org.json`](./.lakehouse/org.json).
 
 <!-- AUTO:badges -->
 [![CI](https://img.shields.io/badge/CI-domain%20pending-lightgrey)](./docs/org.md)
@@ -80,6 +78,7 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for DCO sign-off and the stacked-PR mer
 ## Security
 
 See [SECURITY.md](./SECURITY.md).
+
 
 ## License
 
