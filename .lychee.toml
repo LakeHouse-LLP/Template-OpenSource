@@ -9,5 +9,9 @@ exclude = [
   '^file://',
   '^http://localhost',
   '^https://localhost',
-  '^https://api\\.scorecard\\.dev/',
+  '^https://api\.scorecard\.dev/',
+  # Sen-managed epic ledger (private / not always resolvable with GITHUB_TOKEN).
+  '^https://github\.com/SenZhang-Plus/SenZhang-Todo',
+  # Listing directories occasionally time out from GitHub-hosted runners.
+  '^https://www\.up-for-grabs\.net/',
 ]

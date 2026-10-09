@@ -22,10 +22,19 @@
         "file": "discoverability.yml",
         "status": "planned",
         "note": "TODO: call org discoverability-check reusable workflow when published; keep local discoverability.yml until then."
+      },
+      "placeholder-welcome": {
+        "file": "welcome.yml",
+        "status": "planned",
+        "note": "TODO: call org welcome reusable workflow when published; keep local welcome.yml until then."
       }
     }
   },
   "actions": {
+    "actions/first-interaction": {
+      "tag": "v3.1.0",
+      "sha": "1c4688942c71f71d4f5502a26ea67c331730fa4d"
+    },
     "actions/checkout": {
       "tag": "v7.0.1",
       "sha": "3d3c42e5aac5ba805825da76410c181273ba90b1"

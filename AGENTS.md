@@ -76,6 +76,10 @@ Release tags (`vX.Y.Z`) are created **only by CI**. Never tag or publish by hand
 - Deny-list covers placeholder client/firm names, CAD binaries (`*.rvt`, `*.3dm`, `*.dwg`), `.env` files, and internal hostnames. See `.gitleaks.toml`.
 
 
+## Contributors
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md), [GOVERNANCE.md](./GOVERNANCE.md), and [ROADMAP.md](./ROADMAP.md).
+
 ## Ownership
 
 - CODEOWNERS: `@zsenarchitect`
