@@ -40,10 +40,14 @@ jobs:
 
       - name: Validate changesets config (PR)
         if: github.event_name == 'pull_request'
+        env:
+          BASE_REF: ${{ github.base_ref }}
         run: |
           npm run release:validate
           npm run check:pins
-          npx changeset status
+          # Stacked PRs are not based on main — compare against the PR base.
+          git fetch origin "$BASE_REF" --depth=50
+          npx changeset status --since="origin/$BASE_REF"
 
       - name: Create Version PR or CI tag
         if: github.event_name != 'pull_request'
