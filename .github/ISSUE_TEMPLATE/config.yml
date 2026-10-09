@@ -4,5 +4,5 @@ contact_links:
     url: https://github.com/zsenarchitect
     about: Do not file public issues for vulnerabilities; follow SECURITY.md and contact the code owner
   - name: Org runbook
-    url: https://opensource.lakehouse.dev/runbook
-    about: Shared org defaults live in the organization .github repository (see docs/org.md)
+    url: https://github.com/zsenarchitect
+    about: Shared org defaults live in the organization .github repository (resolve owner via org.json; see docs/org.md)

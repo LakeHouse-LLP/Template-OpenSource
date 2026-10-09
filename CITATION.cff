@@ -6,14 +6,12 @@ message: >-
   the new repository (plain project name, no Template- prefix).
 type: software
 authors:
-  - name: Lakehouse
-    website: https://opensource.lakehouse.dev/
+  - name: LakeHouse
   - family-names: Zhang
     given-names: Sen
     alias: zsenarchitect
     website: https://github.com/zsenarchitect
-repository-code: https://opensource.lakehouse.dev/
-url: https://opensource.lakehouse.dev/
+# repository-code/url pending — set domain in .lakehouse/org.json (currently REPLACE_WITH_CUSTOM_DOMAIN)
 license: pending
 # Suggested license once finalized: Apache-2.0
 keywords:
@@ -22,7 +20,7 @@ keywords:
   - lakehouse
   - "@lakehouse"
 abstract: >-
-  Public GitHub template for Lakehouse open-source projects. Provides
+  Public GitHub template for LakeHouse open-source projects. Provides
   OpenSSF-aligned defaults, README generation, changelog policy, secret
   scanning, and CI guards for zero-cost GitHub Free usage. Org identity lives
-  in .lakehouse/org.json (brand-stable packageScope + custom domain).
+  in .lakehouse/org.json (brand-stable packageScope + custom domain; domain placeholder until Sen chooses one).

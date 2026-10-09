@@ -1,13 +1,13 @@
 # Template-OpenSource
 
-⚠ TEMPLATE — open-source project starter for the **Lakehouse** brand (org identity: [`.lakehouse/org.json`](./.lakehouse/org.json)).
+⚠ TEMPLATE — open-source project starter for the **LakeHouse** brand (org identity: [`.lakehouse/org.json`](./.lakehouse/org.json)).
 
 Projects created from this template should use a **plain repository name** (no `Template-` prefix).
 
 <!-- AUTO:badges -->
-[![CI](https://opensource.lakehouse.dev/badges/ci.svg)](https://opensource.lakehouse.dev/ci)
-[![OpenSSF Scorecard](https://opensource.lakehouse.dev/badges/scorecard.svg)](https://opensource.lakehouse.dev/scorecard)
-[![CodeQL](https://opensource.lakehouse.dev/badges/codeql.svg)](https://opensource.lakehouse.dev/codeql)
+[![CI](https://img.shields.io/badge/CI-domain%20pending-lightgrey)](./docs/org.md)
+[![OpenSSF Scorecard](https://img.shields.io/badge/Scorecard-domain%20pending-lightgrey)](./docs/org.md)
+[![CodeQL](https://img.shields.io/badge/CodeQL-domain%20pending-lightgrey)](./docs/org.md)
 [![tier](https://img.shields.io/badge/tier-public-0B6E4F)](./.lakehouse/tier)
 [![license](https://img.shields.io/badge/license-license%20pending-lightgrey)](./LICENSE)
 [![npm scope](https://img.shields.io/badge/scope-%40lakehouse-cb3837)](./.lakehouse/org.json)
@@ -27,9 +27,9 @@ Projects created from this template should use a **plain repository name** (no `
 <!-- AUTO:repo-meta -->
 | | |
 | --- | --- |
-| Brand | `Lakehouse` |
+| Brand | `LakeHouse` |
 | Package scope | `@lakehouse` |
-| Public domain | [`opensource.lakehouse.dev`](https://opensource.lakehouse.dev/) |
+| Public domain | `REPLACE_WITH_CUSTOM_DOMAIN` (set a real custom domain in org.json — never assume a hostname; never `*.github.io`) |
 | GitHub owner | runtime: `github.repository_owner` or `.lakehouse/org.json` `orgName` |
 | Repository | `Template-OpenSource` |
 | Tier | `public` |

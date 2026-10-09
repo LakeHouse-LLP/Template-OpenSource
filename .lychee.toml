@@ -10,6 +10,4 @@ exclude = [
   '^http://localhost',
   '^https://localhost',
   '^https://api\\.scorecard\\.dev/',
-  # Placeholder public domain from .lakehouse/org.json until DNS/badge endpoints exist.
-  '^https://opensource\.lakehouse\.dev',
 ]

@@ -1,12 +1,17 @@
 #!/usr/bin/env node
 /**
  * Fill <!-- AUTO:name --> blocks in README.md from .lakehouse/org.json.
- * Public badges/links use the custom domain (never *.github.io).
+ * Public badges/links use the custom domain when set (never *.github.io).
  */
 import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { ROOT, expectedRemoteFromEnvOrGit, readText } from "./lib/repo.mjs";
-import { loadOrg, publicBaseUrl, resolveOrgOwner } from "./lib/org.mjs";
+import {
+  loadOrg,
+  publicBaseUrl,
+  resolveOrgOwner,
+  isDomainPlaceholder,
+} from "./lib/org.mjs";
 
 const README = path.join(ROOT, "README.md");
 const BLOCK_RE = /<!-- AUTO:([a-z0-9_-]+) -->[\s\S]*?<!-- \/AUTO:\1 -->/g;
@@ -46,27 +51,42 @@ function licenseStatus() {
 function generators(org, remote) {
   const base = publicBaseUrl(org);
   const name = remote?.name ?? "Template-OpenSource";
-  // Resolve owner for runtime checks only — do not embed the mutable slug in README.
   resolveOrgOwner(org);
   const lic = licenseStatus();
   const t = tier();
+  const domainPending = isDomainPlaceholder(org.domain);
+
+  const badges = domainPending
+    ? [
+        `[![CI](https://img.shields.io/badge/CI-domain%20pending-lightgrey)](./docs/org.md)`,
+        `[![OpenSSF Scorecard](https://img.shields.io/badge/Scorecard-domain%20pending-lightgrey)](./docs/org.md)`,
+        `[![CodeQL](https://img.shields.io/badge/CodeQL-domain%20pending-lightgrey)](./docs/org.md)`,
+        `[![tier](https://img.shields.io/badge/tier-${encodeURIComponent(t)}-0B6E4F)](./.lakehouse/tier)`,
+        `[![license](https://img.shields.io/badge/license-${lic.badgeLabel}-lightgrey)](./LICENSE)`,
+        `[![npm scope](https://img.shields.io/badge/scope-${encodeURIComponent(org.packageScope)}-cb3837)](./.lakehouse/org.json)`,
+      ]
+    : [
+        `[![CI](${base}/badges/ci.svg)](${base}/ci)`,
+        `[![OpenSSF Scorecard](${base}/badges/scorecard.svg)](${base}/scorecard)`,
+        `[![CodeQL](${base}/badges/codeql.svg)](${base}/codeql)`,
+        `[![tier](https://img.shields.io/badge/tier-${encodeURIComponent(t)}-0B6E4F)](./.lakehouse/tier)`,
+        `[![license](https://img.shields.io/badge/license-${lic.badgeLabel}-lightgrey)](./LICENSE)`,
+        `[![npm scope](https://img.shields.io/badge/scope-${encodeURIComponent(org.packageScope)}-cb3837)](./.lakehouse/org.json)`,
+      ];
+
+  const domainRow = domainPending
+    ? `| Public domain | \`${org.domain}\` (set a real custom domain in org.json — never assume a hostname; never \`*.github.io\`) |`
+    : `| Public domain | [\`${org.domain}\`](${base}/) |`;
 
   return {
-    badges: [
-      `[![CI](${base}/badges/ci.svg)](${base}/ci)`,
-      `[![OpenSSF Scorecard](${base}/badges/scorecard.svg)](${base}/scorecard)`,
-      `[![CodeQL](${base}/badges/codeql.svg)](${base}/codeql)`,
-      `[![tier](https://img.shields.io/badge/tier-${encodeURIComponent(t)}-0B6E4F)](./.lakehouse/tier)`,
-      `[![license](https://img.shields.io/badge/license-${lic.badgeLabel}-lightgrey)](./LICENSE)`,
-      `[![npm scope](https://img.shields.io/badge/scope-${encodeURIComponent(org.packageScope)}-cb3837)](./.lakehouse/org.json)`,
-    ].join("\n"),
+    badges: badges.join("\n"),
 
     "repo-meta": [
       `| | |`,
       `| --- | --- |`,
       `| Brand | \`${org.brand}\` |`,
       `| Package scope | \`${org.packageScope}\` |`,
-      `| Public domain | [\`${org.domain}\`](${base}/) |`,
+      domainRow,
       `| GitHub owner | runtime: \`github.repository_owner\` or \`.lakehouse/org.json\` \`orgName\` |`,
       `| Repository | \`${name}\` |`,
       `| Tier | \`${t}\` |`,
@@ -108,12 +128,15 @@ function main() {
   const current = readFileSync(README, "utf8");
   const next = applyBlocks(current, values);
 
-  // Guard: generated README must not embed the mutable org slug (org-lint allowlist excludes README).
   const slug = org.orgName;
   if (next.includes(slug) || next.includes(slug.toLowerCase())) {
     console.error(
       "readme-gen: refusing to write org slug into README; use brand/domain/packageScope only",
     );
+    process.exit(1);
+  }
+  if (next.includes(["opensource", "lakehouse", "dev"].join("."))) {
+    console.error("readme-gen: refusing assumed public domain hostname");
     process.exit(1);
   }
 
