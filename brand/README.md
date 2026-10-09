@@ -1,15 +1,20 @@
-# Brand placeholders (dark-only)
+# Brand assets (LakeHouse Studio v0.3)
 
-**LakeHouse** / LakeHouse Studio styling. Accent token `#7DFFFF`. Sen uploads final artwork.
+Dark mode only. Accent `#7DFFFF`. Base `#1E1E1E`. Type: **Geist**.
+
+This folder is a **local subset** for Template-OpenSource (README header, social preview, palette). The canonical kit lives in `{owner}/.github/brand` (when published; owner from `github.repository_owner` / `org.json`). Do not vendor the full kit here.
 
 | File | Purpose |
 | --- | --- |
-| `logo.svg` + `logo-*.png` | Dark-canvas mark placeholders |
-| `social-preview.png` | 1280×640 GitHub social preview (also mirrored in `docs/media/`) |
-| `palette.json` | CSS-ready tokens — single accent |
-| `USAGE.md` | Do / don’t |
+| `readme-header.svg` / `.png` | README `<picture>` header (1280×320) |
+| `social-preview.png` / `.svg` | 1280×640 GitHub social card |
+| `mark.svg` (+ `mark-*.png`) | L1 mark |
+| `lockup-horizontal.svg` | Horizontal lockup |
+| `favicon.svg` / `.ico` | Site favicon |
+| `palette.json` | CSS-ready tokens (accent, base, Geist) |
+| `tokens.json` | Full W3C design tokens (v0.3) |
+| `USAGE.md` | Do / don't |
 
-Canonical org brand kit (when published): `{owner}/.github` → `brand/`.  
-**TODO:** prefer that kit once the org `.github` SEO draft lands on `main`; keep these local copies until then.
+Writing style (no em dashes, banned hype words): see [AGENTS.md](../AGENTS.md) and [CONTRIBUTING.md](../CONTRIBUTING.md). Full guide: `{owner}/.github/brand/WRITING-STYLE.md` when published.
 
-See [docs/discoverability.md](../docs/discoverability.md) and [docs/media/README.md](../docs/media/README.md).
+See [docs/docs-site.md](../docs/docs-site.md) and [docs/media/README.md](../docs/media/README.md).

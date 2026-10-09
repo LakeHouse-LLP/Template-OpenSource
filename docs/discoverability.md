@@ -1,6 +1,6 @@
 # Discoverability standard (Template-OpenSource)
 
-Zero-cost GitHub-side SEO for **LakeHouse Studio** (brand token in [`.lakehouse/org.json`](../.lakehouse/org.json): `LakeHouse`). Dark mode only; accent `#7DFFFF` ([`brand/palette.json`](../brand/palette.json)). Domain from `org.json` — never `*.github.io`.
+Zero-cost GitHub-side SEO for **LakeHouse Studio** (brand token in [`.lakehouse/org.json`](../.lakehouse/org.json): `LakeHouse`). Dark mode only; base `#1E1E1E`, accent `#7DFFFF`, font Geist ([`brand/palette.json`](../brand/palette.json)). Domain from `org.json`; never `*.github.io`.
 
 **TODO:** Prefer the org runbook copy in `{owner}/.github` → `docs/discoverability.md` when that draft lands on `main`. Local copy kept until then.
 

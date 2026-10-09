@@ -72,6 +72,9 @@ jobs:
         env:
           DISCOVERABILITY_REQUIRE_METADATA: "false"
 
+      - name: Writing style (copy lint)
+        run: npm run check:writing-style
+
       - name: Changelog policy
         if: github.event_name == 'pull_request' || github.event_name == 'merge_group'
         run: npm run check:changelog -- --strict

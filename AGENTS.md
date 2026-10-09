@@ -19,7 +19,7 @@ Org runbook / shared defaults: the organization [`.github`](./docs/org.md) repos
 - **Merge commits only** (no squash, no rebase-merge on GitHub).
 - Prefer small **stacked PRs**, merged bottom-up. See [CONTRIBUTING.md](./CONTRIBUTING.md) and [docs/stacked-prs.md](./docs/stacked-prs.md).
 - This **public** template requires the **GitHub merge queue** on `main` (Free plan allows it for public org repos only). Required workflows include `merge_group:` so queued merges are checked on **GitHub-hosted** runners.
-- **Agents never enqueue or merge** PRs — Sen does (see Never do).
+- **Agents never enqueue or merge** PRs. Sen does (see Never do).
 
 ## License
 
@@ -38,7 +38,20 @@ Agents and automation must **never**:
 6. **Push to an unexpected remote** (see `npm run check:remote` / `scripts/check-wrong-remote.mjs`).
 7. **Hardcode the GitHub org slug** in workflows, docs, or badges (use `org.json`, `github.repository_owner`, brand, or custom domain).
 8. Add **LakeHouse widget** surfaces here (`widget.json`, `@lakehouse/widget-sdk`, host bridge/compat). Use Template-Widget.
-9. **Create, edit, or delete Vercel environment variables** (dashboard or `vercel env add` / `rm`) without Sen’s explicit approval. Prefer team Shared Env Vars + OIDC — see [docs/deploy/vercel-env.md](./docs/deploy/vercel-env.md).
+9. **Create, edit, or delete Vercel environment variables** (dashboard or `vercel env add` / `rm`) without Sen’s explicit approval. Prefer team Shared Env Vars + OIDC. See [docs/deploy/vercel-env.md](./docs/deploy/vercel-env.md).
+
+## Writing style (copy)
+
+Follow LakeHouse Studio WRITING-STYLE (canonical: `{owner}/.github/brand/WRITING-STYLE.md` when published). Agents and humans must:
+
+- **Zero em dashes and en dashes** (U+2014, U+2013). No Chinese 破折号. Use a period, comma, colon, parentheses, or a plain hyphen for ranges (`2-4`, `9:00-17:00`).
+- **No hype or filler wording** from brand WRITING-STYLE §7. The CI list lives in [`scripts/check-writing-style.mjs`](./scripts/check-writing-style.mjs). Prefer concrete verbs and numbers over marketing adjectives.
+- Warm, plain, confident. Say what changed and for whom. Sentence case. US English.
+- Brand name: **LakeHouse** / **LakeHouse Studio** (never Lakehouse or Lake House).
+
+Cheap CI: `npm run check:writing-style` (README, AGENTS, CONTRIBUTING, `brand/*.md`).
+
+Brand tokens for docs UI: dark base `#1E1E1E`, accent `#7DFFFF`, font **Geist** ([`brand/palette.json`](./brand/palette.json)).
 
 ## Required local checks
 
@@ -54,6 +67,7 @@ npm run readme:gen             # refresh <!-- AUTO:* --> blocks
 npm run citation:gen           # refresh CITATION.cff from org.json
 npm run readme:check           # fail when README is stale
 npm run check:discoverability  # README first paragraph (+ topics/description on Actions)
+npm run check:writing-style    # no em/en dashes; banned hype words
 ```
 
 ## README autogen

@@ -2,12 +2,12 @@
 
 <!-- AUTO:header -->
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/media/logo-dark.svg" />
-  <img src="docs/media/logo-light.svg" alt="LakeHouse" width="320" height="80" />
+  <source media="(prefers-color-scheme: dark)" srcset="brand/readme-header.svg" type="image/svg+xml" />
+  <img src="brand/readme-header.png" alt="LakeHouse Studio" width="1280" height="320" />
 </picture>
 <!-- /AUTO:header -->
 
-**LakeHouse Studio** Template-OpenSource is the general-purpose open-source starter for designers and small offices building AEC and design tools (Revit, Rhino, Grasshopper, BIM) — CI, release, SEO, and contributor defaults with **no** LakeHouse widget concepts. Create a plain-named public repo from this template (no `Template-` prefix); identity lives in [`.lakehouse/org.json`](./.lakehouse/org.json).
+**LakeHouse Studio** Template-OpenSource is the general-purpose open-source starter for designers and small offices building AEC and design tools (Revit, Rhino, Grasshopper, BIM): CI, release, SEO, and contributor defaults with **no** LakeHouse widget concepts. Create a plain-named public repo from this template (no `Template-` prefix); identity lives in [`.lakehouse/org.json`](./.lakehouse/org.json).
 
 <!-- AUTO:badges -->
 [![CI](https://img.shields.io/badge/CI-domain%20pending-lightgrey)](./docs/org.md)
@@ -33,7 +33,7 @@
 | --- | --- |
 | Brand | `LakeHouse` |
 | Package scope | `@lakehouse` |
-| Public domain | `REPLACE_WITH_CUSTOM_DOMAIN` (set a real custom domain in org.json — never assume a hostname; never `*.github.io`) |
+| Public domain | `REPLACE_WITH_CUSTOM_DOMAIN` (set a real custom domain in org.json; never assume a hostname; never `*.github.io`) |
 | GitHub owner | runtime: `github.repository_owner` or `.lakehouse/org.json` `orgName` |
 | Repository | `Template-OpenSource` |
 | Tier | `public` |
@@ -46,7 +46,7 @@
 | Org runbook | `{owner}/.github` (see [docs/org.md](./docs/org.md)) |
 <!-- /AUTO:repo-meta -->
 
-Minimal public-template defaults for **non-LakeHouse** open-source products: OpenSSF-aligned CI, README autogen, changelog policy, gitleaks, changesets-driven releases, and guards that keep the org on **GitHub Free** with **GitHub-hosted runners only**. No `widget.json`, widget SDK, or host compatibility — use the sibling **Template-Widget** template for those. Org rename readiness and releasing: brand-stable `packageScope` + custom `domain` (never `*.github.io`); see [docs/org.md](./docs/org.md) and [docs/releasing.md](./docs/releasing.md).
+Minimal public-template defaults for **non-LakeHouse** open-source products: OpenSSF-aligned CI, README autogen, changelog policy, gitleaks, changesets-driven releases, and guards that keep the org on **GitHub Free** with **GitHub-hosted runners only**. No `widget.json`, widget SDK, or host compatibility; use the sibling **Template-Widget** template for those. Org rename readiness and releasing: brand-stable `packageScope` + custom `domain` (never `*.github.io`); see [docs/org.md](./docs/org.md) and [docs/releasing.md](./docs/releasing.md).
 
 ## Quick start
 
