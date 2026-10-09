@@ -1,8 +1,10 @@
 # Action SHAs and org reusable-workflow catalog: .lakehouse/pins.json
+# merge_group: required so GitHub merge queue re-checks on GitHub-hosted runners.
 name: ci
 
 on:
   pull_request:
+  merge_group:
   push:
     branches: [main]
   workflow_dispatch:
@@ -71,7 +73,7 @@ jobs:
           DISCOVERABILITY_REQUIRE_METADATA: "false"
 
       - name: Changelog policy
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' || github.event_name == 'merge_group'
         run: npm run check:changelog -- --strict
 
   gitleaks:

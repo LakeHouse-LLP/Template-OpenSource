@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - SEO / discoverability: dark-only `brand/` (accent `#7DFFFF`), social preview, keyword-rich README, `CITATION.cff`, docs for org Astro Starlight site, launch/awesome/search checklists, and `check:discoverability` CI (GitHub-hosted).
 - Contributor growth: friendly CONTRIBUTING + Codespaces, ROADMAP/GOVERNANCE/SUPPORT, good first issue seeding guide, listings guide, maintainer playbook, all-contributors, and SHA-pinned welcome workflow (no PR checkout).
 - Vercel env-var rule pointer (`docs/deploy/vercel-env.md`) + AGENTS Never-do; canonical detail in org `.github`.
+- Merge queue preference for public `main`: `merge_group` on required workflows; CONTRIBUTING / AGENTS / Sen-only ruleset checklist (merge commits only).
 
 ### Fixed
 

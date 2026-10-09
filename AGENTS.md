@@ -17,7 +17,9 @@ Org runbook / shared defaults: the organization [`.github`](./docs/org.md) repos
 ## Merge policy
 
 - **Merge commits only** (no squash, no rebase-merge on GitHub).
-- Prefer small **stacked PRs**, merged bottom-up. See [CONTRIBUTING.md](./CONTRIBUTING.md).
+- Prefer small **stacked PRs**, merged bottom-up. See [CONTRIBUTING.md](./CONTRIBUTING.md) and [docs/stacked-prs.md](./docs/stacked-prs.md).
+- This **public** template requires the **GitHub merge queue** on `main` (Free plan allows it for public org repos only). Required workflows include `merge_group:` so queued merges are checked on **GitHub-hosted** runners.
+- **Agents never enqueue or merge** PRs — Sen does (see Never do).
 
 ## License
 
@@ -31,7 +33,7 @@ Agents and automation must **never**:
 1. Change repository **visibility**, **settings**, **rulesets**, or **secrets**.
 2. **Force-push** to any branch on any remote.
 3. **Delete or rename** repositories, branches, or tags.
-4. **Merge** into `Template-*` repositories or into the org `.github` repository.
+4. **Merge** into `Template-*` repositories or into the org `.github` repository, or **enqueue** a PR into the merge queue.
 5. **Vendor** shared / org-common code into this tree (link or depend instead). Prefer `{owner}/.github` reusable workflows/docs when published.
 6. **Push to an unexpected remote** (see `npm run check:remote` / `scripts/check-wrong-remote.mjs`).
 7. **Hardcode the GitHub org slug** in workflows, docs, or badges (use `org.json`, `github.repository_owner`, brand, or custom domain).
