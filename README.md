@@ -101,7 +101,7 @@ See [SECURITY.md](./SECURITY.md).
 [![All Contributors](https://img.shields.io/badge/all_contributors-0-orange.svg?style=flat-square)](#contributors)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-Thanks goes to these wonderful people ([emoji key](https://github.com/all-contributors/allcontributors.org/blob/main/docs/emoji-key.md)):
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
