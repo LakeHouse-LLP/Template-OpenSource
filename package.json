@@ -43,7 +43,8 @@
     "check:dco": "node scripts/check-dco.mjs",
     "check:gitleaks": "node scripts/run-gitleaks.mjs",
     "check:discoverability": "node scripts/discoverability-check.mjs",
-    "check:all": "npm run check:org && npm run check:remote && npm run check:tier && npm run check:runners && npm run check:org-slug && npm run check:pins && npm run readme:check && npm run citation:check && npm run release:validate && npm run check:discoverability && npm run check:gitleaks"
+    "check:writing-style": "node scripts/check-writing-style.mjs",
+    "check:all": "npm run check:org && npm run check:remote && npm run check:tier && npm run check:runners && npm run check:org-slug && npm run check:pins && npm run readme:check && npm run citation:check && npm run release:validate && npm run check:discoverability && npm run check:writing-style && npm run check:gitleaks"
   },
   "license": "UNLICENSED",
   "devDependencies": {

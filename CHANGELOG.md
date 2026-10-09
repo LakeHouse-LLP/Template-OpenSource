@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Contributor growth: friendly CONTRIBUTING + Codespaces, ROADMAP/GOVERNANCE/SUPPORT, good first issue seeding guide, listings guide, maintainer playbook, all-contributors, and SHA-pinned welcome workflow (no PR checkout).
 - Vercel env-var rule pointer (`docs/deploy/vercel-env.md`) + AGENTS Never-do; canonical detail in org `.github`.
 - Merge queue preference for public `main`: `merge_group` on required workflows; CONTRIBUTING / AGENTS / Sen-only ruleset checklist (merge commits only).
+- Brand kit v0.3 subset: `brand/readme-header` README `<picture>`, palette base `#1E1E1E` / accent `#7DFFFF` / Geist, docs-site theme notes, WRITING-STYLE rules in AGENTS/CONTRIBUTING, and `check:writing-style` CI.
 
 ### Fixed
 

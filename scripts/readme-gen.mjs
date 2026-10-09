@@ -72,14 +72,14 @@ function generators(org, remote) {
       ];
 
   const domainRow = domainPending
-    ? `| Public domain | \`${org.domain}\` (set a real custom domain in org.json — never assume a hostname; never \`*.github.io\`) |`
+    ? `| Public domain | \`${org.domain}\` (set a real custom domain in org.json; never assume a hostname; never \`*.github.io\`) |`
     : `| Public domain | [\`${org.domain}\`](${base}/) |`;
 
   return {
     header: [
       `<picture>`,
-      `  <source media="(prefers-color-scheme: dark)" srcset="docs/media/logo-dark.svg" />`,
-      `  <img src="docs/media/logo-light.svg" alt="${brandAlt}" width="320" height="80" />`,
+      `  <source media="(prefers-color-scheme: dark)" srcset="brand/readme-header.svg" type="image/svg+xml" />`,
+      `  <img src="brand/readme-header.png" alt="${brandAlt} Studio" width="1280" height="320" />`,
       `</picture>`,
     ].join("\n"),
 
