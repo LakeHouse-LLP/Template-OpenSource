@@ -42,7 +42,12 @@ export function parseGithubRemote(url) {
 export function expectedRemoteFromEnvOrGit() {
   const fromEnv = process.env.EXPECTED_REMOTE?.trim();
   if (fromEnv) {
-    const parsed = parseGithubRemote(fromEnv.includes("github.com") ? fromEnv : `https://github.com/${fromEnv}`);
+    // Accept "owner/name" or a full remote URL. Always go through parseGithubRemote
+    // (host-anchored regex) — do not substring-match "github.com".
+    const asRemote = /^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/.test(fromEnv)
+      ? `https://github.com/${fromEnv}`
+      : fromEnv;
+    const parsed = parseGithubRemote(asRemote);
     if (parsed) return parsed;
   }
   const serverOwner = process.env.GITHUB_REPOSITORY_OWNER;

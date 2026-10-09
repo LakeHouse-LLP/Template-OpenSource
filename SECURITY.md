@@ -12,6 +12,14 @@ Do not open a public issue for exploitable vulnerabilities until a fix or adviso
 
 This template and projects derived from it aim for OpenSSF good practices: dependency updates, CodeQL, Scorecard, gitleaks, and least-privilege workflows.
 
+## Owner one-time GitHub settings (not changed by agents)
+
+Agents must not change repository settings. The owner should enable (when ready):
+
+- **Dependency graph** (+ Dependabot alerts) so `actions/dependency-review-action` can be added to CI
+- **Code scanning** / Scorecard SARIF upload (workflows already present)
+- Branch protection requiring merge commits only
+
 ## Supported versions
 
 Only the default branch (`main`) and the latest release tag receive security fixes unless noted otherwise in the release notes.
