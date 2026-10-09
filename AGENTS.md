@@ -32,9 +32,11 @@ Agents and automation must **never**:
 2. **Force-push** to any branch on any remote.
 3. **Delete or rename** repositories, branches, or tags.
 4. **Merge** into `Template-*` repositories or into the org `.github` repository.
-5. **Vendor** shared / org-common code into this tree (link or depend instead).
+5. **Vendor** shared / org-common code into this tree (link or depend instead). Prefer `{owner}/.github` reusable workflows/docs when published.
 6. **Push to an unexpected remote** (see `npm run check:remote` / `scripts/check-wrong-remote.mjs`).
 7. **Hardcode the GitHub org slug** in workflows, docs, or badges (use `org.json`, `github.repository_owner`, brand, or custom domain).
+8. Add **LakeHouse widget** surfaces here (`widget.json`, `@lakehouse/widget-sdk`, host bridge/compat). Use Template-Widget.
+9. **Create, edit, or delete Vercel environment variables** (dashboard or `vercel env add` / `rm`) without Sen’s explicit approval. Prefer team Shared Env Vars + OIDC — see [docs/deploy/vercel-env.md](./docs/deploy/vercel-env.md).
 
 ## Required local checks
 
