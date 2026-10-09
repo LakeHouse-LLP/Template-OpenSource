@@ -8,11 +8,11 @@ Place product screenshots, demo GIFs/MP4s, and README imagery here.
 | --- | --- |
 | `logo-light.svg` / `logo-dark.svg` | README `<picture>` header (required placeholders) |
 | `logo-light.png` / `logo-dark.png` | Optional raster fallbacks (512px+) |
-| `social-preview.png` | 1280×640 repo social preview candidate |
+| `social-preview.png` | 1280×640 repo social preview (dark-only, accent `#7DFFFF`; also in [`brand/`](../../brand/)) |
 | `screenshots/` | UI stills |
 | `demos/` | Short GIF/MP4 walkthroughs |
 
-Org-wide brand masters (palette, usage rules, additional logo sizes) live in the organization `.github` repository under `brand/` — see [docs/org.md](../org.md). Sen uploads final artwork there; templates keep local copies under `docs/media/` as needed.
+Org-wide brand masters (palette, usage rules, additional logo sizes) live in [`brand/`](../../brand/) locally and (when published) in the organization `.github` repository under `brand/` — see [docs/org.md](../org.md). **TODO:** prefer org `brand/` once that draft lands. Sen uploads final artwork.
 
 ## Rules
 
