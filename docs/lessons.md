@@ -27,3 +27,9 @@ Status values: `open` | `fixed` | `promoted`.
 - **Lesson:** Listing banned hype words in AGENTS/CONTRIBUTING triggers `check:writing-style` on those same files.
 - **Action:** Point readers at `scripts/check-writing-style.mjs` instead of repeating the word list in prose.
 - **Status:** fixed
+
+### 2026-10-10 - first-interaction input names
+
+- **Lesson:** `actions/first-interaction` v3 takes snake_case (`issue_message`, `pr_message`, `repo_token`). Kebab-case keys are ignored, so the job fails with "Input required and not supplied". `pull_request_target` always runs the workflow from the **base** branch, so a PR cannot green that check until main has the fix (or same-repo `pull_request` synchronize re-checks the PR copy).
+- **Action:** Fix `.github/workflows/welcome.yml` inputs; add same-repo `pull_request` synchronize so agents can verify before merge.
+- **Status:** fixed
