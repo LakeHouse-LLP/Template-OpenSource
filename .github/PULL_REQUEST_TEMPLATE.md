@@ -1,6 +1,6 @@
 ## Summary
 
-<!-- What changed and why (2–5 sentences). -->
+<!-- What changed and why (2-5 sentences). -->
 
 ## Stack
 
@@ -12,6 +12,14 @@
 | Blocks | <!-- downstream PR links, or "none" --> |
 
 After the parent merges: retarget this PR to `main`, then merge with a **merge commit**.
+
+## What did we learn?
+
+<!-- Continuous self-improvement (AGENTS.md). Note friction from this work. Fix in this PR when small, or log in docs/lessons.md. Use "none" if nothing new. -->
+
+- **Friction / lesson:**
+- **Action (fixed here / logged / none):**
+- **lessons.md status:** <!-- open | fixed | promoted | n/a -->
 
 ## Test evidence
 
