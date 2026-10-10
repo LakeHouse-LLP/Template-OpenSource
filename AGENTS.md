@@ -53,6 +53,15 @@ Cheap CI: `npm run check:writing-style` (README, AGENTS, CONTRIBUTING, `brand/*.
 
 Brand tokens for docs UI: dark base `#1E1E1E`, accent `#7DFFFF`, font **Geist** ([`brand/palette.json`](./brand/palette.json)).
 
+## Continuous self-improvement
+
+After each task, the agent notes any friction (false starts, brittle checks, missing docs, repeated manual steps) and either:
+
+1. **Fixes it in the same PR** when the change is small and in scope, or
+2. **Logs it** in [`docs/lessons.md`](./docs/lessons.md) with lesson, action, and status (`open` / `fixed` / `promoted`).
+
+Lessons that keep coming up get **promoted** to a house rule in this file, a script under `scripts/`, or a CI check. Fill the **What did we learn?** section in the PR template. Do not skip the note when the task felt smooth: write `none` or a one-line confirmation.
+
 ## Required local checks
 
 ```bash
